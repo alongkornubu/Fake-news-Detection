@@ -1,0 +1,41 @@
+{% extends 'news/base.html' %} 
+{% load static %}
+
+ {% block content %}
+
+
+  <div class="grid justify-items-center mt-20">
+        <label class="font-bold">ตรวจสอบข่าว</label>
+        <textarea
+          rows="5"
+          class="mt-4 block p-2.5 w-96 text-sm text-black bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-200 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+          placeholder="กรอกข้อมูล"
+        ></textarea>
+        <!-- <div>
+          <p class="font-bold">ตรวจสอบข่าว</p>
+        </div>
+        <br />
+        <div>
+          <input
+            type="text"
+            placeholder="กรอกข้อมูล"
+            class="w-96 h-28 border-1 bg-gray-200 rounded"
+          />
+        </div> -->
+        <div>
+          <button
+          type="submit"
+            class="bg-red-500 text-white w-32 h-10 mt-2 rounded hover:bg-blue-500"
+          >
+            ตรวจสอบข่าว
+          </button>
+        </div>
+      </div>
+
+
+
+  {% endblock content%}
+
+
+
+

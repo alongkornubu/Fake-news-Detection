@@ -1,0 +1,73 @@
+{% extends 'news/base.html' %} {% load static %} 
+
+{% block title %} แจ้งเบาะแสข่าว {%endblock title%}
+
+{% block content %}
+
+{% if status  %} 
+
+  {% if status == 'alert' %}
+
+      <div class="mt-20 px-4 py-3 leading-normal text-red-700 bg-red-100 rounded-lg" role="alert">
+        <p class="font-bold">คำเตือน</p>
+        <p>กรุณากรอกข้อมูลให้ครบทุกช่อง</p>
+      </div>
+  {% else %}
+          
+      <div class="mt-20 px-4 py-3 leading-normal text-green-700 bg-green-100 rounded-lg" role="alert">
+        <p class="font-bold">สำเร็จ</p>
+        <p>ทางเราได้รับข้อมูลเรียบร้อย</p>
+      </div>
+  {% endif %}
+          
+      
+
+{% endif %}
+
+
+<div class="mt-20 p-5 grid justify-items-center">
+  <form method="POST" action="">
+    {% csrf_token %}
+    <div>
+      <label for="name">ชื่อ</label><br>
+        <input class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" name="name" type="text" placeholder="ชื่อ">
+    </div>
+    <br>
+
+    <div class="">
+      <label>ข่าวจริงหรือข่าวปลอม</label>
+      <input class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fakeortrue" name="fakeortrue" type="text" placeholder="กรอกว่า จริงหรือปลอม">
+    </div>
+    <br>
+
+    <div>
+      <label>
+        ลิงก์เว็บไซต์ที่ต้องการแจ้งข่าว
+      </label>
+      <input class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="link" type="text" name="link" placeholder="กรอก URL เว็บไซต์ที่ต้องการแจ้งข่าว">
+    </div>
+
+    <br>
+    
+    <div>
+      <textarea
+        name="detail"
+        id="comment"
+        cols="30"
+        rows="10"
+        class="block p-2.5 w-full h-28 text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="ข้อมูลต่างๆที่เกี่ยวข้อง"
+      ></textarea>
+    </div>
+    <div>
+      <button
+        type="submit"
+        class="bg-blue-300 text-white w-32 h-10 mt-2 rounded hover:bg-blue-500"
+      >
+        ส่งคำแนะนำ
+      </button>
+    </div>
+  </form>
+</div>
+
+{% endblock content%}
