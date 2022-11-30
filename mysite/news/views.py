@@ -16,8 +16,8 @@ def login(request):
     return render(request, 'news/login.html')
 
 def follow(request):
-    # new = AddNew.objects.all()
-    new = AddNew.objects.filter(tag="โควิด 19")
+    # new = AddNew.objects.filter(tag="โควิด 19")
+    new = AddNew.objects.all()
     return render(request,'news/follow.html',{'new': new} )
 
 class SignupView(View):

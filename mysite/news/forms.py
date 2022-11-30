@@ -23,7 +23,9 @@ class Loginform(AuthenticationForm):
     username = UsernameField(label="ชื่อผู้ใช้",widget= forms.TextInput(attrs={'autofocus': True,'class':'rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full'}))
     password = forms.CharField(label="รหัสผ่าน",strip=False,widget=forms.PasswordInput(attrs={'autocomplete':'current-password','class':'rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full'}))
 
+
 class news(forms.ModelForm):
     class Meta:
         model = AddNew
-        fields = ['title' , 'text' , 'image' , 'tag']
+        fields = ['title' , 'text' ,'tag', 'image']
+        

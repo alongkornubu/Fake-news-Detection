@@ -7,11 +7,13 @@
     <div class="text-center mt-4">
       <h1 class="font-bold">ข่าวน่าสนใจ</h1>
       <div class="grid grid-cols-4 px-56">
-        {% for news  in new %}
-            <div>
-              <!-- <button class="bg-gray-200 rounded"># {{ news.tag }}</button> -->
-               <a href="" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"># {{ news.tag }}</a>
-            </div>
+        {% for news  in new %} 
+              <div>
+                <!-- <button class="bg-gray-200 rounded"># {{ news.tag }}</button> -->
+                <a href="" class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"># {{ news.tag }}</a>
+              </div> 
+
+           
         {% endfor %}
       </div>
     </div>
@@ -29,6 +31,7 @@
                 <h2 class="text-sm font-bold mb-2">{{ news.title }}
                 <span class="text-sm text-teal-800 font-mono bg-teal-100 inline rounded-full px-2 align-top float-right animate-pulse">{{ news.tag }}</span></h2>
                 <p class="font-light font-mono text-sm text-gray-700 hover:text-gray-900 transition-all duration-200">{{ news.text }}</p>
+                
                 </div>
             </div>
             </div>
