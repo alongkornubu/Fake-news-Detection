@@ -17,6 +17,18 @@ class AddNew(models.Model):
 	text = models.CharField(max_length=500)	
 	tag = models.CharField(max_length=50 ,choices=chocies_type, default='covid-19')
 	image = models.ImageField(upload_to='images', blank=True, null = True) 
+ 
+# class DetectNews(models.Model):
+    
+    
+
+    
+ 
+ 
+
+
+
+	
 
 	
 

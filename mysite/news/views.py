@@ -18,7 +18,8 @@ def login(request):
 def follow(request):
     # new = AddNew.objects.filter(tag="โควิด 19")
     new = AddNew.objects.all()
-    return render(request,'news/follow.html',{'new': new} )
+    image = AddNew.objects.all()
+    return render(request,'news/follow.html',{'new': new , 'image':image} )
 
 class SignupView(View):
     def get(self,request):
