@@ -1,11 +1,12 @@
 from django.shortcuts import render , redirect
 from django.http import HttpResponse
 from django.views.generic import View
-
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 
+# api newsapi
+from newsapi import NewsApiClient
 from .forms import *
 from .models import *
 
@@ -14,6 +15,24 @@ def home(request):
 
 def login(request):
     return render(request, 'news/login.html')
+
+# def follow(request):
+#     newapi = NewsApiClient(api_key="a0947ea99d3140928dfb992091724bda")
+#     top = newapi.get_top_headlines(sources="Pptvhd36.com", category="health" , language="th" , country="th")
+
+#     t = top['articles']
+#     desc = []
+#     news = []
+#     img = []
+    
+#     for i in range(t):
+#         f = t[i]
+#         news.append(f['title'])
+#         desc.append(f['description'])
+#         img.append(f['urlToImage'])
+#     mynews = zip(news,desc , img)
+#     return render(request, 'news/follow.html', context={"mynews":mynews})
+
 
 def follow(request):
     # new = AddNew.objects.filter(tag="โควิด 19")

@@ -31,7 +31,9 @@
                 <h2 class="text-sm font-bold mb-2">{{ news.title }}
                 <span class="text-sm text-teal-800 font-mono bg-teal-100 inline rounded-full px-2 align-top float-right animate-pulse">{{ news.tag }}</span></h2>
                 <p class="font-light font-mono text-sm text-gray-700 hover:text-gray-900 transition-all duration-200">{{ news.text }}</p>
-                
+                {% for i in image %}
+                    <img src={{ i.image.url }} alt="">
+                {% endfor %}
                 </div>
             </div>
             </div>
