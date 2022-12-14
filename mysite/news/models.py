@@ -8,7 +8,7 @@ class Feedback(models.Model):
 
 chocies_type = [
 	('covid-19','โควิด-19'),
-	('hemp','กัญชา'),
+	('hemp','กัญชา'), 
 	('bank','ธนาคาร'),
 ]
 
@@ -16,20 +16,14 @@ class AddNew(models.Model):
 	title = models.CharField(max_length=200)
 	text = models.CharField(max_length=500)	
 	tag = models.CharField(max_length=50 ,choices=chocies_type, default='covid-19')
-	image = models.ImageField(upload_to='images/', blank=True, null = True) 
- 
+	image = models.ImageField(upload_to='images', blank=True, null = True) 
+
+"""
+class Tag(m.m):
+	name = charField(max_length=200)
+	tag_of = key(AddNew)
+"""
 # class DetectNews(models.Model):
-    
-    
 
-    
- 
- 
-
-
-
-	
-
-	
 
 

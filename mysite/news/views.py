@@ -36,9 +36,17 @@ def login(request):
 
 def follow(request):
     # new = AddNew.objects.filter(tag="โควิด 19")
+    # new = AddNew.objects.get(id=14)
     new = AddNew.objects.all()
-    image = AddNew.objects.all()
-    return render(request,'news/follow.html',{'new': new , 'image':image} )
+    tag = []
+    for i in new:
+        if i.tag not in tag:
+            tag.append(i.tag)
+        else:
+            continue
+    print('TAG : ',tag)
+    print(new , type(new))
+    return render(request,'news/follow.html',{'new': new,'tag':tag})
 
 class SignupView(View):
     def get(self,request):
