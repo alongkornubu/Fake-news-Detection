@@ -20,12 +20,12 @@ class Registerform(UserCreationForm):
         fields = {'username'}
 
 class Loginform(AuthenticationForm):
-    username = UsernameField(label="ชื่อผู้ใช้",widget= forms.TextInput(attrs={'autofocus': True,'class':'rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full'}))
-    password = forms.CharField(label="รหัสผ่าน",strip=False,widget=forms.PasswordInput(attrs={'autocomplete':'current-password','class':'rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full'}))
+    username = UsernameField(label="ชื่อผู้ใช้",widget= forms.TextInput(attrs={'class':'rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full'}))
+    password = forms.CharField(label="รหัสผ่าน",strip=False,widget=forms.PasswordInput(attrs={'class':'rounded-sm px-4 py-3 mt-3 focus:outline-none bg-gray-100 w-full'}))
 
 
 class news(forms.ModelForm):
     class Meta:
-        model = AddNew
+        model = New
         fields = ['title' , 'text' ,'tag', 'image']
         

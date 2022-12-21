@@ -3,4 +3,4 @@ from .models import *
 # Register your models here.
 
 admin.site.register(Feedback)
-admin.site.register(AddNew)
+admin.site.register(New)

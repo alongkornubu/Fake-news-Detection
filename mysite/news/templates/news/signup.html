@@ -15,11 +15,11 @@
                 <h1 class="font-medium text-2xl mt-3 text-center">สมัครสมาชิก</h1>
                 <form action="" method="POST" class="mt-6"> 
                     {% csrf_token %}
-                        {% for fm in form %}
-                            {{fm.label_tag}}
-                            {{fm}}
+                        {% for f in form %}
+                            {{f.label_tag}}
+                            {{f}}
                         <div class="mt-">
-                            <small class="text-red-300">{{fm.errors|striptags}}</small>
+                            <small class="text-red-300">{{ f.errors|striptags }}</small>
                         </div>
                         {% endfor %}
                         

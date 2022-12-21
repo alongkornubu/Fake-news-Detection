@@ -8,11 +8,11 @@
       <h1 class="font-bold">ข่าวน่าสนใจ</h1>
       <div class="grid grid-cols-4 px-56">
         {% for i in tag %}
-          
-          <div class="ml-4 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 rounded-full w-40 bg-white text-gray-700 border">
-            {{i}}
-          </div>
-        {% endfor %}
+
+        <div class="ml-4 text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 rounded-full w-40 bg-white text-gray-700 border">
+          {{i}}
+        </div>
+      {% endfor %}
       </div>
     </div>
 
@@ -21,15 +21,17 @@
     <!-- card -->
     
     <div class="px-5 py-15">
-      {% for n  in new %}
+      {% for i in new %}
         <div class="container mt-4 mx-auto">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <div class="card m-2 cursor-pointer border border-gray-400 rounded-lg hover:shadow-md hover:border-opacity-0 transform hover:-translate-y-1 transition-all duration-200">
                 <div class="m-3">
-                <h2 class="text-sm font-bold mb-2">{{ n.title }}
-                <span class="text-sm text-teal-800 font-mono bg-teal-100 inline rounded-full px-2 align-top float-right animate-pulse">{{ n.tag }}</span></h2>
-                <p class="font-light font-mono text-sm text-gray-700 hover:text-gray-900 transition-all duration-200">{{ n.text }}</p>
-                <img src={{ n.image.url }} alt="">
+                <h2 class="text-sm font-bold mb-2">{{ i.title }}
+                <span class="text-sm text-teal-800 font-mono bg-teal-100 inline rounded-full px-2 align-top float-right animate-pulse">{{ i.tag }}</span></h2>
+                <p class="font-light font-mono text-sm text-gray-700 hover:text-gray-900 transition-all duration-200">{{ i.text }}</p>
+                
+                <img src={{ i.image.url }} alt="">
+                
                 </div>
             </div>
             </div>
@@ -41,4 +43,4 @@
     </div>
     
 
-{% endblock content%}
+{% endblock content %}

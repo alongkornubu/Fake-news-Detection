@@ -1,0 +1,15 @@
+{% extends 'news/base.html' %}
+
+{% block content %}
+
+    {% for new , des ,i  in mylist %}
+        <h1>{{new}}</h1>
+        {{ value|linebreaks }}
+        <img src="{{i}}" alt="">
+        <h4>{{ des }}</h4>
+        {{ value|linebreaks }}
+        
+
+    {% endfor %}
+
+{% endblock content %}
