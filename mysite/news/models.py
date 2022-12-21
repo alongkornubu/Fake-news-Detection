@@ -1,10 +1,10 @@
 from django.db import models
 
-class Feedback(models.Model):
+class Feedbacks(models.Model):
 	name = models.CharField(max_length=100)
 	fakeortrue = models.CharField(max_length=200)
 	link = models.CharField(max_length = 500)
-	detail = models.TextField(blank=True , null= True)
+	text = models.TextField(max_length=600)
 
 chocies_type = [
 	('covid-19','โควิด-19'),

@@ -89,7 +89,7 @@ def news_feedback(request):
             context['status'] = 'alert'
             return render(request, 'news/feedback.html',context)
         
-        test = Feedback()
+        test = Feedbacks()
         test.name = name
         test.fakeortrue = fakeortrue
         test.detail = detail
