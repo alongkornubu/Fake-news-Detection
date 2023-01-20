@@ -5,8 +5,19 @@ from django.contrib.auth import login as auth_login, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 
+#ML
+# import pandas as pd
+import pickle
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import PassiveAggressiveClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix
+
 # api newsapi
 from newsapi import NewsApiClient
+from pythainlp.corpus import thai_stopwords 
+stop_words = thai_stopwords()
+from pythainlp.tokenize import word_tokenize 
 
 # pythainlp
 from pythainlp import word_tokenize
@@ -15,6 +26,7 @@ from .forms import *
 from .models import *
 
 def home(request):
+    
     return render(request, 'news/index.html')
 
 def login(request):
@@ -26,7 +38,8 @@ def follows(request):
 def new(requests):
     return render(requests, 'news/addnew.html')
 
-
+def test(requests):
+    return render(requests, 'news/follows.html')
 def follow(request):
     # new = AddNew.objects.filter(tag="โควิด 19")
     # new = AddNew.objects.get(id=14)
@@ -81,9 +94,9 @@ def news_feedback(request):
         data = request.POST.copy()
         name = data.get('name')
         fakeortrue = data.get('fakeortrue')
-        detail = data.get('detail')
+        text = data.get('text')
         link = data.get('link')
-        # print(name,detail , fakeortrue ,link)
+        # print(name,text , fakeortrue ,link)
 
         if name == '' or fakeortrue == '':
             context['status'] = 'alert'
@@ -92,7 +105,7 @@ def news_feedback(request):
         test = Feedbacks()
         test.name = name
         test.fakeortrue = fakeortrue
-        test.detail = detail
+        test.text = text
         test.link = link
         test.save()
         context['status'] = ['success']

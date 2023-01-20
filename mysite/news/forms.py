@@ -29,3 +29,6 @@ class news(forms.ModelForm):
         model = New
         fields = ['title' , 'text' ,'tag', 'image']
         
+# class detect_news(forms.ModelForm):
+#     class Meta:
+        
