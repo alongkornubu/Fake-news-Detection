@@ -6,27 +6,57 @@ from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
 
 #ML
-# import pandas as pd
+import pandas as pd
 import pickle
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import PassiveAggressiveClassifier
 from sklearn.metrics import accuracy_score, confusion_matrix
 
-# api newsapi
-from newsapi import NewsApiClient
+#pythainlp
 from pythainlp.corpus import thai_stopwords 
 stop_words = thai_stopwords()
 from pythainlp.tokenize import word_tokenize 
 
-# pythainlp
-from pythainlp import word_tokenize
+# อ่านโมเดล
+model = pickle.load(open('/mysite/model.pkl', 'rb'))
+dataframe = pd.read_csv('./data/Data_news.csv')
+x = dataframe['text']
+y = dataframe['label']
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)
+
 
 from .forms import *
 from .models import *
 
-def home(request):
+def text_tokenizer(text):
+    terms = [k.strip() for k in word_tokenize(text) if len(k.strip()) > 0 and k.strip()] 
+    return [t for t in terms if len(t) > 0 or t is not None]
+def text_processor(text):
+    return text
     
+stop_words = [t.encode('utf-8') for t in list(thai_stopwords())]
+tfidf_vectors = TfidfVectorizer(
+    tokenizer = text_tokenizer,
+    preprocessor = text_processor,
+    ngram_range=(2,3),
+    stop_words=stop_words,
+    max_features=3_000        
+)    
+
+def detect(Data_News):
+    input_data = [Data_News]
+    vectorized_input_data = tfidf_vectors.transform(input_data)
+    prediction = model.predict(vectorized_input_data)
+    return prediction
+
+def detect_news(request):
+    if request.method == 'POST':
+        data = request.POST.copy()
+        text = data.get('text')
+        pred = detect(text)
+        # print(text)
+        
     return render(request, 'news/index.html')
 
 def login(request):
@@ -38,8 +68,6 @@ def follows(request):
 def new(requests):
     return render(requests, 'news/addnew.html')
 
-def test(requests):
-    return render(requests, 'news/follows.html')
 def follow(request):
     # new = AddNew.objects.filter(tag="โควิด 19")
     # new = AddNew.objects.get(id=14)

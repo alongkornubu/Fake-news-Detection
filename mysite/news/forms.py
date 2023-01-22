@@ -29,6 +29,6 @@ class news(forms.ModelForm):
         model = New
         fields = ['title' , 'text' ,'tag', 'image']
         
-# class detect_news(forms.ModelForm):
-#     class Meta:
-        
+class detect_fake_news(forms.Form):
+    class Meta:
+        text = forms.CharField(label='ข่าว', max_length=500)

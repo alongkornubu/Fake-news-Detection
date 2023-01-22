@@ -6,7 +6,7 @@ from .views import *
 
 # path('login/', login , name= "login"),
 urlpatterns = [
-    path('',home, name="detect-news"),
+    path('',detect_news, name="detect_news"),
     path('feedback/',news_feedback, name="feedback"),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='news/index.html'), name='logout'),
