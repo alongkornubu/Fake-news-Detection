@@ -123,14 +123,16 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-   
+    BASE_DIR / "data"
 ]
 
 # Base url to serve media files  
 MEDIA_URL = '/media/'  
-  
+
 # Path where media is stored  
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')  
 

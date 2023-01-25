@@ -2,6 +2,23 @@
 
 <div class="grid justify-items-center mt-16">
   <label class="font-bold">ตรวจสอบข่าว</label>
+  {% if status  %} 
+
+  {% if status == 'real' %}
+  
+      <div class="mt-10 px-4 py-3 leading-normal text-green-700 bg-green-100 rounded-lg" role="alert">
+        <p>ข่าวจริง</p>
+      </div>
+  {% else %}
+      <div class="mt-10 px-4 py-3 leading-normal text-red-700 bg-red-100 rounded-lg" role="alert">
+        <!-- <p class="font-bold">สำเร็จ</p> -->
+        <p>ข่าวปลอม</p>
+      </div>
+  {% endif %}
+          
+      
+
+{% endif %}
   <form action="" method="post">
     {% csrf_token %}
     <textarea
@@ -19,6 +36,7 @@
       </button>
     </div>
   </form>
+
 </div>
 
 {% endblock content%}

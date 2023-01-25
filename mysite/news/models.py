@@ -19,6 +19,12 @@ class New(models.Model):
 	image = models.ImageField(upload_to='images', blank=True, null = True)
 
 
+class Csv(models.Model):
+    title = models.CharField(max_length=500)
+    text = models.CharField(max_length=500)
+    label = models.CharField(max_length=200)
+    category = models.CharField(max_length=200)
+
 
 
 

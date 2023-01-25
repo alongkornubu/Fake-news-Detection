@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(Feedbacks)
 admin.site.register(New)
+admin.site.register(Csv)

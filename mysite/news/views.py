@@ -4,10 +4,12 @@ from django.views.generic import View
 from django.contrib.auth import login as auth_login, authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import UserCreationForm
-
+from django.db import connection
+from django.core.files import File
 #ML
 import pandas as pd
 import pickle
+
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import PassiveAggressiveClassifier
@@ -18,46 +20,70 @@ from pythainlp.corpus import thai_stopwords
 stop_words = thai_stopwords()
 from pythainlp.tokenize import word_tokenize 
 
-# อ่านโมเดล
-model = pickle.load(open('/mysite/model.pkl', 'rb'))
-dataframe = pd.read_csv('./data/Data_news.csv')
-x = dataframe['text']
-y = dataframe['label']
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)
+
+dataframe = pd.read_csv('data/Data_news.csv')
+model = pickle.load(open('data/model.pkl','rb'))
 
 
-from .forms import *
-from .models import *
 
 def text_tokenizer(text):
     terms = [k.strip() for k in word_tokenize(text) if len(k.strip()) > 0 and k.strip()] 
     return [t for t in terms if len(t) > 0 or t is not None]
 def text_processor(text):
     return text
-    
+x = dataframe['text']
+y = dataframe['label']
+labels = dataframe['label']
+text =dataframe['text']
 stop_words = [t.encode('utf-8') for t in list(thai_stopwords())]
+
 tfidf_vectors = TfidfVectorizer(
     tokenizer = text_tokenizer,
     preprocessor = text_processor,
     ngram_range=(2,3),
     stop_words=stop_words,
-    max_features=3_000        
-)    
+    max_features=50000
+    
+)
 
-def detect(Data_News):
-    input_data = [Data_News]
+x_train,x_test,y_train,y_test=train_test_split( text, labels, test_size=0.5, random_state=5)
+tfidf_train = tfidf_vectors.fit_transform(x_train)
+tfidf_test= tfidf_vectors.transform(x_test)
+
+pac=PassiveAggressiveClassifier(max_iter=50)
+pac.fit(tfidf_train,y_train)
+y_pred=pac.predict(tfidf_test)
+# accuracy = accuracy_score(y_test, y_pred)
+# print(f'accu:{round(accuracy*100,2)}%' )
+
+
+
+from .forms import *
+from .models import *
+
+def detect(Data_news):
+    input_data = [Data_news]
     vectorized_input_data = tfidf_vectors.transform(input_data)
-    prediction = model.predict(vectorized_input_data)
+    # score = pac.predict(vectorized_input_data)
+    prediction = pac.predict(vectorized_input_data)
     return prediction
 
 def detect_news(request):
+    context = {}
     if request.method == 'POST':
-        data = request.POST.copy()
+        data = request.POST
         text = data.get('text')
         pred = detect(text)
-        # print(text)
-        
-    return render(request, 'news/index.html')
+        print('ข้อมูล',text)
+        print('ทำนาย',pred)
+        if pred == 'real':
+            context['status'] = 'real'
+            # print('context',t)
+            return render(request, 'news/index.html', context)  
+        else:
+            context['status'] = 'fake'
+            # print('context',a)
+    return render(request, 'news/index.html', context)
 
 def login(request):
     return render(request, 'news/login.html')
@@ -136,10 +162,12 @@ def news_feedback(request):
         test.text = text
         test.link = link
         test.save()
-        context['status'] = ['success']
+        context['status'] = 'success'
 
         
     return render(request, 'news/feedback.html',context)
+
+
 
 
 
